@@ -1,0 +1,20 @@
+PySide6
+pyqtgraph
+torch
+numpy
+Pillow
+trimesh
+pyopengl
+# InstantMesh Dependencies
+diffusers
+transformers
+huggingface_hub
+rembg
+omegaconf
+einops
+pytorch-lightning
+open_clip_torch
+imageio
+imageio-ffmpeg
+opencv-python
+kiui

@@ -1,0 +1,29 @@
+# Large model dependencies
+backend/InstantMesh/
+
+# Generation outputs and temporary assets
+output/
+assets/
+*.obj
+*.glb
+*.png
+*.jpg
+*.jpeg
+
+# Python environment and cache
+__pycache__/
+.venv/
+env/
+venv/
+.env
+
+# System files
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# IDE files
+.vscode/
+.idea/
+*.swp
+*.swo
