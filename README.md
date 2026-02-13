@@ -48,3 +48,37 @@ python main.py
 
 ---
 *Developed with ❤️ for 3D creators.*
+
+## 📚 Panduan Pengelolaan Berkas dengan GitHub
+
+Bagian ini dirancang untuk memudahkan Anda mengelola kode sumber proyek, baik untuk backup maupun saat bekerja di komputer yang berbeda.
+
+### A. Langkah Pertama: Menghubungkan Proyek ke GitHub
+*Lakukan ini hanya sekali saat pertama kali ingin meng-upload folder dari laptop ke internet:*
+
+1.  **Inisialisasi Folder**: Ketik `git init` di terminal.
+2.  **Siapkan Antrean**: Ketik `git add .` untuk menandai semua file.
+3.  **Beri Label**: Ketik `git commit -m "Upload pertama dari IdeaPad"`.
+4.  **Hubungkan Link**: Ketik `git remote add origin [LINK_GITHUB_ANDA.git]`.
+5.  **Kirim Pertama Kali**: Ketik `git push -u origin master` (Login jika diminta).
+
+### B. Langkah Update: Mengirim Perubahan Baru
+*Lakukan ini setiap kali Anda selesai mengubah kode (misal benerin UI atau nambah fitur) agar data di GitHub selalu yang terbaru:*
+
+1.  **Cek Status**: Ketik `git status` untuk melihat file apa saja yang baru diubah.
+2.  **Update Antrean**: Ketik `git add .` (tanda titik artinya semua file yang berubah).
+3.  **Beri Catatan Update**: Ketik `git commit -m "Deskripsi perubahan, misal: perbaiki tombol stop"`.
+4.  **Kirim Perubahan**: Ketik `git push origin master`.
+
+### C. Langkah Sinkron: Mengambil Data di Komputer Lain
+*Gunakan ini jika Anda pindah ke komputer baru atau ingin update terbaru:*
+
+1.  **Clone Proyek**: `git clone [LINK_GITHUB_ANDA.git]`.
+2.  **Tarik Update**: Jika komputer sudah ada datanya tapi ingin update terbaru, cukup ketik `git pull origin master`.
+3.  **Download Mesin**: Karena folder `backend/InstantMesh` tidak ikut di-upload (di-ignore), Anda wajib menjalankan perintah ini di dalam folder `backend/`:
+    ```bash
+    git clone https://github.com/TencentARC/InstantMesh.git
+    ```
+
+---
+*Developed with ❤️ for 3D creators.*

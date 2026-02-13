@@ -181,6 +181,8 @@ class MainWindow(QMainWindow):
         file_menu.addAction("New Project", self.action_new_project)
         file_menu.addAction("Open Image", self.action_open_image)
         file_menu.addSeparator()
+        file_menu.addAction("Clean Cache", self.action_clean_cache)
+        file_menu.addSeparator()
         file_menu.addAction("Export Mesh", self.action_export_mesh)
         file_menu.addAction("Exit", self.close)
         
@@ -200,6 +202,23 @@ class MainWindow(QMainWindow):
     # --- Actions ---
     def action_new_project(self): self.log_panel.info("New Project.")
     def action_open_image(self): self.log_panel.info("Open Image.")
+    def action_clean_cache(self):
+        reply = QMessageBox.question(self, "Clean Cache", 
+                                     "Delete all generated files in output/ and assets/?\nThis cannot be undone.",
+                                     QMessageBox.Yes | QMessageBox.No)
+        if reply == QMessageBox.Yes:
+            from backend.manager import BackendManager
+            count, mb = BackendManager().clear_output_cache()
+            msg = f"Cleaned {count} files ({mb:.2f} MB freed)."
+            self.log_panel.success(msg)
+            self.status_bar_label.setText("Cache Cleaned")
+            
+            # Additional info for HF cache
+            self.log_panel.info("Tip: To clear model download cache, manually delete ~/.cache/huggingface") 
+            
+            # Clear Asset Manager list visually
+            self.asset_manager.list_widget.clear()
+
     def action_export_mesh(self): self.export_mesh()
     def action_undo(self): self.log_panel.info("Undo.")
     def action_redo(self): self.log_panel.info("Redo.")

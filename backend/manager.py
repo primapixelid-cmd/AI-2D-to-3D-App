@@ -96,3 +96,44 @@ class BackendManager:
         
     def should_stop(self):
         return self._stop_requested
+
+    def clear_output_cache(self):
+        """
+        Clears files in output/ and assets/thumbnails/ directories.
+        Returns a tuple (deleted_count, freed_space_mb).
+        """
+        targets = [
+            os.path.join("output"),
+            os.path.join("assets", "thumbnails")
+        ]
+        
+        deleted_count = 0
+        freed_bytes = 0
+        
+        for folder in targets:
+            if not os.path.exists(folder):
+                continue
+                
+            for filename in os.listdir(folder):
+                file_path = os.path.join(folder, filename)
+                
+                # Skip directories and special files
+                if os.path.isdir(file_path):
+                    continue
+                if filename in [".gitignore", ".DS_Store", "Thumbs.db"]:
+                    continue
+                if not (filename.endswith(".obj") or filename.endswith(".glb") or filename.endswith(".png") or filename.endswith(".jpg")):
+                    # Safety check: only delete known generated extensions
+                    # actually user asked to delete all "output" files except ignored ones
+                    # let's be safer but also compliant: delete if it looks like a generated file or temp
+                    pass
+                
+                try:
+                    size = os.path.getsize(file_path)
+                    os.remove(file_path)
+                    deleted_count += 1
+                    freed_bytes += size
+                except Exception as e:
+                    print(f"Failed to delete {file_path}: {e}")
+                    
+        return deleted_count, freed_bytes / (1024 * 1024)
